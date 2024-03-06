@@ -1,0 +1,91 @@
+using System;
+using System.Collections.Generic;
+
+namespace CylindricalBarrels
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<Barrel> barrels = new List<Barrel>();
+            string input;
+            do
+            {
+                Console.WriteLine("Enter height (or 'q' to quit):");
+                input = Console.ReadLine();
+                if (input.ToLower() == "q")
+                {
+                    break;
+                }
+                double height;
+                if (!double.TryParse(input, out height))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    continue;
+                }
+                Console.WriteLine("Enter radius (or 'q' to quit):");
+                input = Console.ReadLine();
+                if (input.ToLower() == "q")
+                {
+                    break;
+                }
+                double radius;
+                if (!double.TryParse(input, out radius))
+                {
+                    Console.WriteLine("Invalid input. Please enter a number.");
+                    continue;
+                }
+                barrels.Add(new Barrel(height, radius));
+            } while (true);
+
+            if (barrels.Count == 0)
+            {
+                Console.WriteLine("No barrels entered.");
+                return;
+            }
+
+            double totalVolume = 0;
+            int countOver10 = 0;
+            double closestTo10 = double.MaxValue;
+            Barrel largestBarrel = null;
+            foreach (Barrel barrel in barrels)
+            {
+                double volume = barrel.CalculateVolume();
+                totalVolume += volume;
+                if (volume > 10)
+                {
+                    countOver10++;
+                }
+                if (Math.Abs(volume - 10) < Math.Abs(closestTo10 - 10))
+                {
+                    closestTo10 = volume;
+                    largestBarrel = barrel;
+                }
+            }
+
+            Console.WriteLine("Number of barrels: " + barrels.Count);
+            Console.WriteLine("Volume of each barrel: " + barrels[0].CalculateVolume());
+            Console.WriteLine("Number of barrels with volume > 10: " + countOver10);
+            Console.WriteLine("Volume closest to 10: " + closestTo10);
+            Console.WriteLine("Largest barrel volume: " + largestBarrel.CalculateVolume());
+            Console.WriteLine("Total volume: " + totalVolume);
+        }
+    }
+
+    class Barrel
+    {
+        public double Height { get; set; }
+        public double Radius { get; set; }
+
+        public Barrel(double height, double radius)
+        {
+            Height = height;
+            Radius = radius;
+        }
+
+        public double CalculateVolume()
+        {
+            return Math.PI * Math.Pow(Radius, 2) * Height;
+        }
+    }
+}
