@@ -1,0 +1,72 @@
+using System;
+
+class Program
+{
+    public static void Main()
+    {
+        // sabitleri tanımla
+        const double чарка = 0.123;  // litre
+        const double шкалик = 0.06;  // litre
+
+        // kullanıcıdan veri al
+        Console.WriteLine("Имя первого человека:");
+        string name1 = Console.ReadLine();
+        Console.WriteLine("Количество чарка, которое выпил первый человек:");
+        int x = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Имя второго человека:");
+        string name2 = Console.ReadLine();
+        Console.WriteLine("Количество шкалик, которое выпил второй человек:");
+        int y = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Имя третьего человека:");
+        string name3 = Console.ReadLine();
+        Console.WriteLine("Количество чарка, которое выпил третий человек:");
+        int z = int.Parse(Console.ReadLine());
+        Console.WriteLine("Количество шкалик, которое выпил первый человек:");
+        int w = int.Parse(Console.ReadLine());
+
+        // her bir arkadaşın içtiği toplam litreyi hesapla
+        double total1 = x * чарка;
+        double total2 = y * шкалик;
+        double total3 = z * чарка + w * шкалик;
+
+        // a) her bir arkadaşın içtiği miktarı yazdır
+        Console.WriteLine($"{name1} выпил {total1} Л.");
+        Console.WriteLine($"{name2} выпил {total2} Л.");
+        Console.WriteLine($"{name3} выпил {total3} Л.");
+
+        // b) 0,5 litreden fazla ve 1 litreden az içenlerin isimlerini yazdır
+        if (total1 > 0.5 && total1 < 1)
+        {
+            Console.WriteLine($"{name1} выпил более 0,5 литра, и менее 1 литра.");
+        }
+        if (total2 > 0.5 && total2 < 1)
+        {
+            Console.WriteLine($"{name2} выпил более 0,5 литра, и менее 1 литра.");
+        }
+        if (total3 > 0.5 && total3 < 1)
+        {
+            Console.WriteLine($"{name3} выпил более 0,5 литра, и менее 1 литра.");
+        }
+
+        // c) total içilen miktarı yazdır
+        double total = total1 + total2 + total3;
+        Console.WriteLine("Общее количество выпитого: {0} Л", total);
+
+        // d) en çok içen arkadaşın adını yazdır
+        double maxTotal = Math.Max(total1, Math.Max(total2, total3));
+        if (maxTotal == total1)
+        {
+            Console.WriteLine("Человек, который пьет больше всего: {0}", name1);
+        }
+        else if (maxTotal == total2)
+        {
+            Console.WriteLine("Человек, который пьет больше всего: {0}", name2);
+        }
+        else
+        {
+            Console.WriteLine("Человек, который пьет больше всего: {0}", name3);
+        }
+    }
+}

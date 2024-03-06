@@ -1,0 +1,12 @@
+public static void RemoveNumber(int[] numbers, int numberToRemove)
+{
+    int insertIndex = 0;
+    for (int i = 0; i < numbers.Length; i++)
+    {
+        if (numbers[i] != numberToRemove)
+        {
+            numbers[insertIndex] = numbers[i];
+            insertIndex++;
+        }
+    }
+}

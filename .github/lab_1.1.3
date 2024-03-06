@@ -1,0 +1,27 @@
+using System;
+
+class Program
+{
+    public static void Main()
+    {
+        // kullanıcıdan doğum tarihini iste
+        Console.WriteLine("Enter your date of birth (yyyy-mm-dd):");
+        DateTime birthDate = DateTime.Parse(Console.ReadLine());
+
+        // mevcut sistem tarihini al
+        DateTime now = DateTime.Now;
+
+        // kişinin yaşını hesapla
+        int age = now.Year - birthDate.Year;
+
+        // yaşa göre mesajı biçimlendir
+        string message = $"You are {age} years old";
+        if (age > 1)
+        {
+            message += " year";
+        }
+
+        // mesajı görüntüle
+        Console.WriteLine(message);
+    }
+}

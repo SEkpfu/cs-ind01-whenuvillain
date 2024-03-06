@@ -1,0 +1,30 @@
+using System;
+
+class Program
+{
+    public static void Main()
+    {
+        // n değerini al
+        Console.WriteLine("Ввести целое неотрицательное число:");
+        int n = int.Parse(Console.ReadLine());
+
+        // 2'den n'e kadar olan asal sayılar
+        for (int i = 2; i <= n; i++)
+        {
+            bool isPrime = true;
+            for (int j = Math.Sqrt(i); j >= 2; j--)
+            {
+                if (i % j == 0)
+                {
+                    isPrime = false;
+                    break;
+                }
+            }
+
+            if (isPrime)
+            {
+                Console.WriteLine(i);
+            }
+        }
+    }
+}

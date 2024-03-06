@@ -1,0 +1,93 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<Distance> distances = new List<Distance>();
+        Random random = new Random();
+
+        for (int i = 0; i < 100; i++)
+        {
+            int km = random.Next(0, 100);
+            int m = random.Next(0, 100);
+            int cm = random.Next(0, 100);
+            int mm = random.Next(0, 1000);
+
+            distances.Add(new Distance(km, m, cm, mm));
+        }
+
+        int minIndex = 0;
+        int maxIndex = 0;
+        int equalToFiveKm5m5cm5mmCount = 0;
+
+        for (int i = 0; i < distances.Count; i++)
+        {
+            int comparisonResult = CompareDistances(distances[i], new Distance(5, 5, 5, 5));
+
+            if (comparisonResult == -1)
+            {
+                minIndex = i;
+            }
+            else if (comparisonResult == 1)
+            {
+                maxIndex = i;
+            }
+
+            if (distances[i].Equals(new Distance(5, 5, 5, 5)))
+            {
+                equalToFiveKm5m5cm5mmCount++;
+            }
+        }
+
+        Console.WriteLine($"Самое большое номер самого маленького количество расстояний, совпавших с 5 км 5 м 5 см 5 мм: {equalToFiveKm5m5cm5mmCount}");
+        Console.WriteLine($"Номер самого маленького расстояния: {minIndex}");
+        Console.WriteLine($"Номер самого большого расстояния: {maxIndex}");
+    }
+
+    static int CompareDistances(Distance distance1, Distance distance2)
+    {
+        if (distance1.TotalMillimeters < distance2.TotalMillimeters)
+        {
+            return -1;
+        }
+        else if (distance1.TotalMillimeters > distance2.TotalMillimeters)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+}
+
+class Distance
+{
+    public int Km { get; set; }
+    public int M { get; set; }
+    public int Cm { get; set; }
+    public int Mm { get; set; }
+
+    public Distance(int km, int m, int cm, int mm)
+    {
+        Km = km;
+        M = m;
+        Cm = cm;
+        Mm = mm;
+    }
+
+    public int TotalMillimeters
+    {
+        get
+        {
+            return Km * 1000 + M * 100 + Cm * 10 + Mm;
+        }
+    }
+
+    public bool Equals(Distance other)
+    {
+        return Km == other.Km && M == other.M && Cm == other.Cm && Mm == other.Mm;
+    }
+}

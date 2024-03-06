@@ -1,0 +1,17 @@
+using System;
+class Program {
+  public static void Main (string[] args) {
+    // kullanıcıdan adını ve yaşını alıyoruz
+    Console.WriteLine("What is your name?");
+    string name = Console.ReadLine();
+    
+    Console.WriteLine("How old are you?");
+    int age = int.Parse(Console.ReadLine());
+    
+    // gelecek yılki yaşını hesaplıyoruz
+    int nextYearAge = age + 1;
+    
+    // karşılama mesajı yazdırdık;
+    Console.WriteLine($"Hello {name}! Next year you will be {nextYearAge} years old.");
+  }
+}
